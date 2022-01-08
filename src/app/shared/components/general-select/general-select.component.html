@@ -1,0 +1,50 @@
+<div>
+  <button class="select-trigger"
+          (click)="open(menu, header)" #header
+          [ngClass]="calculateClasses()">
+
+
+    <ng-template [ngIf]="!isOpen" [ngIfElse]="search">
+
+      <ng-template [ngIf]="!headerTemplate">{{label}}</ng-template>
+      <ng-template *ngTemplateOutlet="headerTemplate; context: {$implicit: label}"></ng-template>
+
+    </ng-template>
+
+
+    <ng-template #search>
+      <input [formControl]="searchControl"
+             placeholder="Search.." autofocus
+             (click)="$event.stopPropagation()">
+    </ng-template>
+
+  </button>
+
+
+  <ng-template #menu>
+    <div class="select-menu"
+         [ngClass]="calculateClasses()">
+
+
+      <div *ngIf="!options.length"
+           class="no-results-item">No results...
+      </div>
+
+      <div *ngFor="let option of options"
+           class="select-item"
+           [ngClass]="calculateClasses()"
+           [class.active]="isActive(option)"
+           (click)="select(option)">
+        {{option.label}}
+<!--        <ng-template [ngIf]="!optionTemplate">{{option.label}}</ng-template>-->
+<!--        <ng-template *ngTemplateOutlet="optionTemplate; context: {$implicit: option}"></ng-template>-->
+      </div>
+
+    </div>
+  </ng-template>
+
+  <button (click)="reset()"
+          class="reset">reset
+  </button>
+
+</div>

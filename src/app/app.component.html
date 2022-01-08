@@ -1,0 +1,21 @@
+
+<div>
+  {{selectedItem | json}}
+  {{selectedValue}}
+
+  <general-select [options]="menu"
+                  [color]="'warning'"
+                  [size]="'medium'"
+                  [shape]="'round'"
+                  (selectedValue)="onSelectedValue($event)"
+                  (selectedOption)="onSelectedItem($event)">
+  </general-select>
+
+</div>
+
+<!--<div [formGroup]="form">-->
+<!--  <general-select formControlName="myForm"></general-select>-->
+<!--</div>-->
+
+
+<router-outlet></router-outlet>
